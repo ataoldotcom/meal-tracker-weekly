@@ -1,0 +1,29 @@
+
+Meal tracker for {{ meal_data.customer_name }}:
+{{meal_data.month_dates}} 2024
+Daily Calorie Goal: {{ meal_data.calorie_goal }}
+
+{% for day, meals in meal_data.meals_by_day.items() %}
+Day: {{ day }} / Total Calories = {{ meals.total_calories }}
+--------------------------------------------
+{% for meal_type, meal_list in meals.items() %}
+  {% if meal_type != "total_calories" %}
+    {{ meal_type.capitalize() }}:
+    {% for meal in meal_list %}
+      - {{ meal.meal }}: {{ meal.calories }} calories
+      {% if meal.is_high_protein %}
+    * High Protein 🦾
+      {% endif %}
+    {%- endfor %}
+----------------------------------------------
+  {%- endif %}
+{%- endfor %}
+{% endfor %}
++++++++++++++++++++++++++++++++++++++++++++++++
+    🍽️ Total Weekly Calories 🍽️ : {{ weekly_total_calories}} calories
+  {% if weekly_total_calories <= weekly_calorie_goal %}
+🌟🌟 You stayed under your calorie goal! 🌟🌟
+  {% else %} 
+❗️ ❗️ You exceeded your calorie goal  ❗️ ❗️
+  {% endif %}
+++++++++++++++++++++++++++++++++++++++++++++++++
