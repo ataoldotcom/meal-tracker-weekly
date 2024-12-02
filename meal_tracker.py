@@ -9,7 +9,7 @@ env = Environment(loader = FileSystemLoader('templates'))
 
 #load the template
 try:
-    template = env.get_template('meal_tracker.jinja')
+    template = env.get_template('meal_tracker_v1.jinja')
     print("Template loaded successfully")
 except Exception as e:
     print(f"Error! Template could not be loaded: {e}")
@@ -19,7 +19,7 @@ try:
     meal_data = {
         "calorie_goal": 2500,
         "customer_name": "Blanche",
-        "month_dates": "Nov 25-26th,",
+        "month_date": "Oct 23rd,",
         "meals_by_day": {
             "Monday": {
                 "breakfast": [
@@ -35,7 +35,7 @@ try:
                     {"meal": "Roated Veggies", "calories": 300, "is_high_protein": False}
                 ],
             },
-            "Tuesday": { #if more days are needed COPY the structure of the dictionary starting from this ENTIRE LINE including indentation
+            "Tuesday": { #if more days are needed COPY the structure of the dictionary starting from this ENTIRE LINE including white spaces
                 "breakfast": [
                     {"meal": "Egg-white Breakfast cups", "calories": 170, "is_high_protein": True},
                     {"meal": "Protein Smoothie", "calories": 150, "is_high_protein": True}
@@ -65,22 +65,9 @@ for day, meals in meal_data["meals_by_day"].items():
             total_calories += sum(meal["calories"] for meal in meal_list)
     meals["total_calories"] = total_calories
 
-#calculation of weekly calories  
-weekly_total_calories = sum(meals["total_calories"] for meals in meal_data["meals_by_day"].values())
-
-#calculation of weekly calorie goal
-number_of_days = len(meal_data["meals_by_day"])
-weekly_calorie_goal = number_of_days * meal_data["calorie_goal"]
-
-#debug which variable isn't an int:
-print("Type of weekly_total_calories:", type(weekly_total_calories))
-print("Type of weekly_calorie_goal:", type(weekly_calorie_goal))
-print("Type of meal_data['calorie_goal']:", type(meal_data["calorie_goal"]))
-print("Type of number_of_days:", type(number_of_days))
-
-#render data in template format
+#render data in temlate format
 try:
-    meal_tracker = template.render(meal_data=meal_data, weekly_total_calories=weekly_total_calories, weekly_calorie_goal=weekly_calorie_goal)
+    meal_tracker = template.render(meal_data)
     print(meal_tracker)
 except Exception as exc:
     print(f"Error! Meal planner could not be printed: {exc}")
