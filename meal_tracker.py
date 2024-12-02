@@ -73,10 +73,10 @@ number_of_days = len(meal_data["meals_by_day"])
 weekly_calorie_goal = number_of_days * meal_data["calorie_goal"]
 
 #debug which variable isn't an int:
-print("Type of weekly_total_calories:", type(weekly_total_calories))
-print("Type of weekly_calorie_goal:", type(weekly_calorie_goal))
-print("Type of meal_data['calorie_goal']:", type(meal_data["calorie_goal"]))
-print("Type of number_of_days:", type(number_of_days))
+#print("Type of weekly_total_calories:", type(weekly_total_calories))
+#print("Type of weekly_calorie_goal:", type(weekly_calorie_goal))
+#print("Type of meal_data['calorie_goal']:", type(meal_data["calorie_goal"]))
+#print("Type of number_of_days:", type(number_of_days))
 
 #render data in template format
 try:
